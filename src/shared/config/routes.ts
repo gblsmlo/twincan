@@ -1,6 +1,10 @@
 import {
 	Activity,
+	Bug,
 	DollarSign,
+	FileText,
+	Folder,
+	HelpCircle,
 	Home,
 	LinkIcon,
 	type LucideIcon,
@@ -12,6 +16,7 @@ import {
 	Sparkles,
 	Store,
 	TrendingUp,
+	User,
 	Users,
 } from 'lucide-react'
 
@@ -22,9 +27,8 @@ export type SubRoute = {
 }
 
 export type Route = {
-	id: string
-	title: string
 	icon?: LucideIcon
+	label: string
 	link: string
 	subs?: SubRoute[]
 }
@@ -32,13 +36,12 @@ export type Route = {
 export const dashboardRoutes: Route[] = [
 	{
 		icon: Home,
-		id: 'home',
+		label: 'Home',
 		link: '/dashboard',
-		title: 'Home',
 	},
 	{
 		icon: Package2,
-		id: 'products',
+		label: 'Products',
 		link: '/dashboard/products',
 		subs: [
 			{
@@ -57,11 +60,10 @@ export const dashboardRoutes: Route[] = [
 				title: 'Discounts',
 			},
 		],
-		title: 'Products',
 	},
 	{
 		icon: PieChart,
-		id: 'usage-billing',
+		label: 'Usage Billing',
 		link: '/dashboard/usage-billing',
 		subs: [
 			{
@@ -75,23 +77,20 @@ export const dashboardRoutes: Route[] = [
 				title: 'Events',
 			},
 		],
-		title: 'Usage Billing',
 	},
 	{
 		icon: Sparkles,
-		id: 'benefits',
+		label: 'Benefits',
 		link: '/dashboard/benefits',
-		title: 'Benefits',
 	},
 	{
 		icon: Users,
-		id: 'customers',
+		label: 'Customers',
 		link: '/dashboard/customers',
-		title: 'Customers',
 	},
 	{
 		icon: ShoppingBag,
-		id: 'sales',
+		label: 'Sales',
 		link: '/dashboard/sales',
 		subs: [
 			{
@@ -105,39 +104,97 @@ export const dashboardRoutes: Route[] = [
 				title: 'Subscriptions',
 			},
 		],
-		title: 'Sales',
 	},
 	{
 		icon: Store,
-		id: 'storefront',
+		label: 'Storefront',
 		link: '/dashboard/storefront',
-		title: 'Storefront',
 	},
 	{
 		icon: TrendingUp,
-		id: 'analytics',
+		label: 'Analytics',
 		link: '/dashboard/analytics',
-		title: 'Analytics',
 	},
 	{
 		icon: DollarSign,
-		id: 'finance',
+		label: 'Finance',
 		link: '/dashboard/finance',
-		subs: [
-			{ link: '/dashboard/finance/incoming', title: 'Incoming' },
-			{ link: '/dashboard/finance/outgoing', title: 'Outgoing' },
-			{ link: '/dashboard/finance/payout-account', title: 'Payout Account' },
-		],
-		title: 'Finance',
 	},
 	{
 		icon: Settings,
-		id: 'settings',
+		label: 'Settissngs',
 		link: '/dashboard/settings',
-		subs: [
-			{ link: '/dashboard/settings/account/preferences', title: 'Preferences' },
-			{ link: '/dashboard/settings/account/profile', title: 'Profile' },
-		],
-		title: 'Settings',
+	},
+]
+
+export const documentsRoutes: Route[] = [
+	{
+		icon: FileText,
+		label: 'Files',
+		link: '/dashboard/docs/files',
+	},
+	{
+		icon: PieChart,
+		label: 'Reports',
+		link: '/dashboard/docs/reports',
+	},
+	{
+		icon: FileText,
+		label: 'Resources',
+		link: '/dashboard/docs/resources',
+	},
+]
+
+export const mainRoutes: Route[] = [
+	{
+		icon: Home,
+		label: 'Dashboard',
+		link: '/dashboard',
+	},
+	{
+		icon: PieChart,
+		label: 'Analytics',
+		link: '/dashboard/analytics',
+	},
+	{
+		icon: Folder,
+		label: 'Projects',
+		link: '/dashboard/projects',
+	},
+	{
+		icon: Users,
+		label: 'Team',
+		link: '/dashboard/team',
+	},
+]
+
+export const secondaryRoutes: Route[] = [
+	{
+		icon: Settings,
+		label: 'Settings',
+		link: '/dashboard/settings',
+	},
+	{
+		icon: HelpCircle,
+		label: 'Help & Support',
+		link: '/dashboard/help',
+	},
+	{
+		icon: Bug,
+		label: 'Bugs',
+		link: '/dashboard/bugs',
+	},
+]
+
+export const userRoutes: Route[] = [
+	{
+		icon: User,
+		label: 'Profile',
+		link: '/dashboard/settings/account/profile',
+	},
+	{
+		icon: Settings,
+		label: 'Preferences',
+		link: '/dashboard/settings/account/preferences',
 	},
 ]
