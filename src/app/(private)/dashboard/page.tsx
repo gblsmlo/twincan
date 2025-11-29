@@ -1,11 +1,34 @@
-import { getSessionAction } from '@/modules/auth'
+import { MainContent } from '@components/ui/main-content'
+import { PageDescription, PageHeader, PageTitle } from '@components/ui/page-header'
+// import { getSessionAction } from '@/modules/auth'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+	description: 'This is your dashboard',
+	title: 'Dashboard',
+}
 
 export default async function Page() {
-	const session = await getSessionAction()
+	// const session = await getSessionAction()
+	const title = String(metadata.title)
+	const description = String(metadata.description)
+
 	return (
-		<div>
-			<h1>Dashboard</h1>
-			<p>{session?.user.name ? `${session.user.name} logado` : 'Não logado'}</p>
-		</div>
+		<MainContent size="2xl">
+			<PageHeader>
+				<PageTitle>{title}</PageTitle>
+				{description && <PageDescription>{description}</PageDescription>}
+			</PageHeader>
+
+			<div className="space-y-4">
+				<div className="grid grid-cols-4 gap-4">
+					<div className="col-span-1 h-40 w-full rounded border bg-background/50" />
+					<div className="col-span-1 h-40 w-full rounded border bg-background/50" />
+					<div className="col-span-1 h-40 w-full rounded border bg-background/50" />
+					<div className="col-span-1 h-40 w-full rounded border bg-background/50" />
+				</div>
+				<div className="h-[calc(100vh-26rem)] w-full rounded border bg-background/50" />
+			</div>
+		</MainContent>
 	)
 }
