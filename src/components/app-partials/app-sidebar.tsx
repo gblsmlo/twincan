@@ -8,10 +8,17 @@ import {
 	SidebarHeader,
 	useSidebar,
 } from '@components/ui/sidebar'
-import { documentsRoutes, mainRoutes, secondaryRoutes, userRoutes } from '@shared/config/routes'
+import {
+	crmRoutes,
+	documentsRoutes,
+	mainRoutes,
+	secondaryRoutes,
+	userRoutes,
+} from '@shared/config/routes'
 import Link from 'next/link'
 import type * as React from 'react'
 import { Logo } from '../logo'
+import { NavCRM } from '../navigations/nav-crm'
 import { NavMain } from '../navigations/nav-main'
 import { NavSecondary } from '../navigations/nav-secondary'
 import { NavUser } from '../navigations/nav-user'
@@ -32,6 +39,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 			</SidebarHeader>
 			<SidebarContent>
 				<NavMain items={mainRoutes} />
+				<NavCRM items={crmRoutes} />
 				<NavDocuments items={documentsRoutes} />
 				<NavSecondary className="mt-auto" items={secondaryRoutes} />
 			</SidebarContent>

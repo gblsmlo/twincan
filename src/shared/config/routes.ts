@@ -1,5 +1,8 @@
 import {
+	Briefcase,
 	Bug,
+	Building2,
+	Contact,
 	FileText,
 	Folder,
 	HelpCircle,
@@ -44,6 +47,24 @@ export const mainRoutes: Route[] = [
 		icon: Users,
 		label: 'Team',
 		link: '/dashboard/team',
+	},
+]
+
+export const crmRoutes: Route[] = [
+	{
+		icon: Contact,
+		label: 'Contacts',
+		link: '/dashboard/crm/contacts',
+	},
+	{
+		icon: Building2,
+		label: 'Companies',
+		link: '/dashboard/crm/companies',
+	},
+	{
+		icon: Briefcase,
+		label: 'Deals',
+		link: '/dashboard/crm/deals',
 	},
 ]
 
@@ -98,6 +119,7 @@ export const userRoutes: Route[] = [
 
 export const allRoutes: Route[] = [
 	...mainRoutes,
+	...crmRoutes,
 	...secondaryRoutes,
 	...documentsRoutes,
 	...userRoutes,
