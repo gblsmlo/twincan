@@ -1,11 +1,11 @@
 {
-	"id": "1241d507-8cf5-40c3-bb9c-da80ef7354fd",
+	"id": "607ab6b2-6ccd-44c0-b73e-97c35bab7c15",
 	"prevId": "00000000-0000-0000-0000-000000000000",
 	"version": "7",
 	"dialect": "postgresql",
 	"tables": {
-		"public.accounts": {
-			"name": "accounts",
+		"public.account": {
+			"name": "account",
 			"schema": "",
 			"columns": {
 				"access_token": {
@@ -90,10 +90,10 @@
 			},
 			"indexes": {},
 			"foreignKeys": {
-				"accounts_user_id_users_id_fk": {
-					"name": "accounts_user_id_users_id_fk",
-					"tableFrom": "accounts",
-					"tableTo": "users",
+				"account_user_id_user_id_fk": {
+					"name": "account_user_id_user_id_fk",
+					"tableFrom": "account",
+					"tableTo": "user",
 					"columnsFrom": ["user_id"],
 					"columnsTo": ["id"],
 					"onDelete": "cascade",
@@ -106,8 +106,8 @@
 			"checkConstraints": {},
 			"isRLSEnabled": false
 		},
-		"public.sessions": {
-			"name": "sessions",
+		"public.session": {
+			"name": "session",
 			"schema": "",
 			"columns": {
 				"expires_at": {
@@ -162,10 +162,10 @@
 			},
 			"indexes": {},
 			"foreignKeys": {
-				"sessions_user_id_users_id_fk": {
-					"name": "sessions_user_id_users_id_fk",
-					"tableFrom": "sessions",
-					"tableTo": "users",
+				"session_user_id_user_id_fk": {
+					"name": "session_user_id_user_id_fk",
+					"tableFrom": "session",
+					"tableTo": "user",
 					"columnsFrom": ["user_id"],
 					"columnsTo": ["id"],
 					"onDelete": "cascade",
@@ -174,8 +174,8 @@
 			},
 			"compositePrimaryKeys": {},
 			"uniqueConstraints": {
-				"sessions_token_unique": {
-					"name": "sessions_token_unique",
+				"session_token_unique": {
+					"name": "session_token_unique",
 					"nullsNotDistinct": false,
 					"columns": ["token"]
 				}
@@ -184,8 +184,8 @@
 			"checkConstraints": {},
 			"isRLSEnabled": false
 		},
-		"public.users": {
-			"name": "users",
+		"public.user": {
+			"name": "user",
 			"schema": "",
 			"columns": {
 				"email": {
@@ -249,13 +249,13 @@
 			"foreignKeys": {},
 			"compositePrimaryKeys": {},
 			"uniqueConstraints": {
-				"users_email_unique": {
-					"name": "users_email_unique",
+				"user_email_unique": {
+					"name": "user_email_unique",
 					"nullsNotDistinct": false,
 					"columns": ["email"]
 				},
-				"users_stripe_customer_id_unique": {
-					"name": "users_stripe_customer_id_unique",
+				"user_stripe_customer_id_unique": {
+					"name": "user_stripe_customer_id_unique",
 					"nullsNotDistinct": false,
 					"columns": ["stripe_customer_id"]
 				}
@@ -264,8 +264,8 @@
 			"checkConstraints": {},
 			"isRLSEnabled": false
 		},
-		"public.verifications": {
-			"name": "verifications",
+		"public.verification": {
+			"name": "verification",
 			"schema": "",
 			"columns": {
 				"expires_at": {

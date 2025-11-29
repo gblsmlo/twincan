@@ -1,4 +1,4 @@
-CREATE TABLE "accounts" (
+CREATE TABLE "account" (
 	"access_token" text,
 	"access_token_expires_at" timestamp,
 	"account_id" text NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE "accounts" (
 	"updated_at" timestamp with time zone NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "sessions" (
+CREATE TABLE "session" (
 	"expires_at" timestamp NOT NULL,
 	"id" text PRIMARY KEY NOT NULL,
 	"ip_address" text,
@@ -23,10 +23,10 @@ CREATE TABLE "sessions" (
 	"user_id" text NOT NULL,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"updated_at" timestamp with time zone NOT NULL,
-	CONSTRAINT "sessions_token_unique" UNIQUE("token")
+	CONSTRAINT "session_token_unique" UNIQUE("token")
 );
 --> statement-breakpoint
-CREATE TABLE "users" (
+CREATE TABLE "user" (
 	"email" text NOT NULL,
 	"email_verified" boolean DEFAULT false NOT NULL,
 	"id" text PRIMARY KEY NOT NULL,
@@ -36,11 +36,11 @@ CREATE TABLE "users" (
 	"stripe_customer_id" text,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"updated_at" timestamp with time zone NOT NULL,
-	CONSTRAINT "users_email_unique" UNIQUE("email"),
-	CONSTRAINT "users_stripe_customer_id_unique" UNIQUE("stripe_customer_id")
+	CONSTRAINT "user_email_unique" UNIQUE("email"),
+	CONSTRAINT "user_stripe_customer_id_unique" UNIQUE("stripe_customer_id")
 );
 --> statement-breakpoint
-CREATE TABLE "verifications" (
+CREATE TABLE "verification" (
 	"expires_at" timestamp NOT NULL,
 	"id" text PRIMARY KEY NOT NULL,
 	"identifier" text NOT NULL,
@@ -49,5 +49,5 @@ CREATE TABLE "verifications" (
 	"updated_at" timestamp with time zone NOT NULL
 );
 --> statement-breakpoint
-ALTER TABLE "accounts" ADD CONSTRAINT "accounts_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "sessions" ADD CONSTRAINT "sessions_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
+ALTER TABLE "account" ADD CONSTRAINT "account_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "session" ADD CONSTRAINT "session_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;

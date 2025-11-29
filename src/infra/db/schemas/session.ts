@@ -1,9 +1,9 @@
 import { pgTable, text, timestamp } from 'drizzle-orm/pg-core'
 import { uuidv7 } from 'uuidv7'
 import { auditFields } from '../helpers'
-import { userTable } from './users'
+import { user } from './user'
 
-export const sessionTable = pgTable('sessions', {
+export const session = pgTable('session', {
 	expiresAt: timestamp('expires_at').notNull(),
 	id: text('id')
 		.primaryKey()
@@ -13,6 +13,6 @@ export const sessionTable = pgTable('sessions', {
 	userAgent: text('user_agent'),
 	userId: text('user_id')
 		.notNull()
-		.references(() => userTable.id, { onDelete: 'cascade' }),
+		.references(() => user.id, { onDelete: 'cascade' }),
 	...auditFields,
 })
