@@ -4,6 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+	--radius: 0.625rem;
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--font-sans: var(--font-sans);
@@ -52,7 +53,7 @@
 	--popover-foreground: var(--color-stone-950);
 	--primary: var(--color-stone-800);
 	--primary-foreground: var(--color-stone-50);
-	--secondary: var(--color-stone-200);
+	--secondary: var(--color-stone-300);
 	--secondary-foreground: var(--color-stone-800);
 	--muted: var(--color-stone-200);
 	--muted-foreground: var(--color-stone-600);
@@ -117,5 +118,8 @@
 	}
 	body {
 		@apply bg-background text-foreground;
+	}
+	button {
+		@apply cursor-pointer;
 	}
 }
