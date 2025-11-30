@@ -3,8 +3,8 @@ import { PageDescription, PageHeader, PageTitle } from '@components/ui/page-head
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-	description: 'Manage your products and services',
-	title: 'Products',
+	description: 'Manage your store settings and overview',
+	title: 'Store',
 }
 
 export default function Page() {

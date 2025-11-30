@@ -13,6 +13,7 @@ import {
 	documentsRoutes,
 	mainRoutes,
 	secondaryRoutes,
+	storeRoutes,
 	userRoutes,
 } from '@shared/config/routes'
 import Link from 'next/link'
@@ -21,6 +22,7 @@ import { Logo } from '../logo'
 import { NavCRM } from '../navigations/nav-crm'
 import { NavMain } from '../navigations/nav-main'
 import { NavSecondary } from '../navigations/nav-secondary'
+import { NavStore } from '../navigations/nav-store'
 import { NavUser } from '../navigations/nav-user'
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -41,6 +43,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				<NavMain items={mainRoutes} />
 				<NavCRM items={crmRoutes} />
 				<NavDocuments items={documentsRoutes} />
+				<NavStore items={storeRoutes} />
 				<NavSecondary className="mt-auto" items={secondaryRoutes} />
 			</SidebarContent>
 			<SidebarFooter className="mt-4 border-t pt-4">
