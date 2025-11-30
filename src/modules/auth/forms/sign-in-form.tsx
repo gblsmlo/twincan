@@ -10,7 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { isFailure, isSuccess } from '@shared/errors/result'
 import { sleep } from '@utils/sleep'
 import { redirect } from 'next/navigation'
-import { Activity, useTransition } from 'react'
+import { useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { signInAction } from '../actions'
@@ -105,9 +105,7 @@ export function SignInForm() {
 						)}
 					/>
 					<Button disabled={isSubmitPending} type="submit">
-						<Activity mode={isSubmitPending ? 'visible' : 'hidden'}>
-							<Spinner />
-						</Activity>
+						{isSubmitPending && <Spinner />}
 						Entrar
 					</Button>
 
