@@ -9,6 +9,7 @@ import {
 	Home,
 	type LucideIcon,
 	PieChart,
+	ReceiptIcon,
 	Settings,
 	User,
 	Users,
@@ -107,13 +108,13 @@ export const documentsRoutes: Route[] = [
 export const userRoutes: Route[] = [
 	{
 		icon: User,
-		label: 'Profile',
+		label: 'Account',
 		link: '/dashboard/settings/account/profile',
 	},
 	{
-		icon: Settings,
-		label: 'Preferences',
-		link: '/dashboard/settings/account/preferences',
+		icon: ReceiptIcon,
+		label: 'Billing',
+		link: '/dashboard/billing',
 	},
 ]
 

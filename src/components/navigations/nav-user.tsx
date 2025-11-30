@@ -1,7 +1,8 @@
 'use client'
 
-import type { Route } from '@/shared/config/routes'
-import { Avatar, AvatarFallback, AvatarImage } from '@components/ui/avatar'
+import { signOut, useSession } from '@/infra/auth/client'
+import { type Route, userRoutes } from '@/shared/config/routes'
+import { toSlug } from '@/utils/to-slug'
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -12,14 +13,11 @@ import {
 	DropdownMenuTrigger,
 } from '@components/ui/dropdown-menu'
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@components/ui/sidebar'
-import {
-	IconCreditCard,
-	IconDotsVertical,
-	IconLogout,
-	IconNotification,
-	IconUserCircle,
-} from '@tabler/icons-react'
-import type { ComponentProps } from 'react'
+import { IconDotsVertical, IconLogout } from '@tabler/icons-react'
+import { useRouter } from 'next/navigation'
+import { type ComponentProps, useEffect, useState } from 'react'
+import { toast } from 'sonner'
+import { NavUserAvatar } from './nav-user-avatar'
 
 type NavUserProps = ComponentProps<'ul'> & {
 	items: Route[]
@@ -30,8 +28,47 @@ type NavUserProps = ComponentProps<'ul'> & {
 	}
 }
 
-export function NavUser({ items, user, ...props }: NavUserProps) {
+type User = {
+	name: string
+	email?: string
+	image?: string | null
+}
+
+export function NavUser({ items, ...props }: NavUserProps) {
+	const [user, setUser] = useState<User | null>()
 	const { isMobile } = useSidebar()
+	const { data: session } = useSession()
+	const router = useRouter()
+
+	useEffect(() => {
+		if (!session?.user) {
+			setUser(null)
+			return
+		}
+
+		setUser({
+			email: session.user.email,
+			image: session.user.image,
+			name: session.user.name,
+		})
+	}, [session?.user])
+
+	const handleSignOut = async () => {
+		await signOut({
+			fetchOptions: {
+				onError: () => {
+					toast.error('Ocorreu um erro ao sair. Tente novamente.')
+				},
+				onSuccess: () => {
+					router.push('/auth/login')
+				},
+			},
+		})
+	}
+
+	if (!user) {
+		return null
+	}
 
 	return (
 		<SidebarMenu {...props}>
@@ -42,12 +79,8 @@ export function NavUser({ items, user, ...props }: NavUserProps) {
 							className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
 							size="lg"
 						>
-							<Avatar className="h-8 w-8 rounded-lg grayscale">
-								<AvatarImage alt={user.name} src={user.avatar} />
-								<AvatarFallback className="rounded-lg">
-									{user.name.charAt(0).toUpperCase()}
-								</AvatarFallback>
-							</Avatar>
+							<NavUserAvatar image={user?.image} name={user.name} />
+
 							<div className="grid flex-1 text-left text-sm leading-tight">
 								<span className="truncate font-medium">{user.name}</span>
 								<span className="truncate text-muted-foreground text-xs">{user.email}</span>
@@ -63,10 +96,8 @@ export function NavUser({ items, user, ...props }: NavUserProps) {
 					>
 						<DropdownMenuLabel className="p-0 font-normal">
 							<div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-								<Avatar className="h-8 w-8 rounded-lg">
-									<AvatarImage alt={user.name} src={user.avatar} />
-									<AvatarFallback className="rounded-lg">CN</AvatarFallback>
-								</Avatar>
+								<NavUserAvatar image={user?.image} name={user.name} />
+
 								<div className="grid flex-1 text-left text-sm leading-tight">
 									<span className="truncate font-medium">{user.name}</span>
 									<span className="truncate text-muted-foreground text-xs">{user.email}</span>
@@ -75,21 +106,19 @@ export function NavUser({ items, user, ...props }: NavUserProps) {
 						</DropdownMenuLabel>
 						<DropdownMenuSeparator />
 						<DropdownMenuGroup>
-							<DropdownMenuItem>
-								<IconUserCircle />
-								Account
-							</DropdownMenuItem>
-							<DropdownMenuItem>
-								<IconCreditCard />
-								Billing
-							</DropdownMenuItem>
-							<DropdownMenuItem>
-								<IconNotification />
-								Notifications
-							</DropdownMenuItem>
+							{userRoutes.map((route) => {
+								return (
+									<DropdownMenuItem
+										key={toSlug(route.label)}
+										onClick={() => router.push(route.link)}
+									>
+										{route.label}
+									</DropdownMenuItem>
+								)
+							})}
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem>
+						<DropdownMenuItem onClick={handleSignOut}>
 							<IconLogout />
 							Log out
 						</DropdownMenuItem>
